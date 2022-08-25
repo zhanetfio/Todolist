@@ -14,7 +14,7 @@ export type TaskType = {
 
 type TodolistType = {
     id: string
-    todolistId: string
+
     title: string
     tasks: Array<TaskType>
     addTask: (todolistId: string, title: string) => void
@@ -51,21 +51,19 @@ export function Todolist(props: TodolistType) {
             <AddItemForm addItem={addTask}/>
 
             <div>
-                {props.tasks && props.tasks.map((t) => {
+                {props.tasks.map((t) => {
                     const onClickHandler = () => props.removeTask(props.id, t.id)
                     const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
                         props.changeTaskStatus(props.id, t.id, e.currentTarget.checked)
-
                     }
                     const onChangeTitleHandler = (value: string) => props.changeTaskTitle(t.id, value, props.id)
-
-
                     return <div key={t.id} className={t.isDone ? "is-done" : ""}>
-                        <Checkbox color="primary"
+                        <Checkbox
+                            color="primary"
                                   onChange={onChangeStatusHandler}
                                   checked={t.isDone}/>
-                        <EditableSpan title={props.title} changeTitle={onChangeTitleHandler}/>
-                        <IconButton onClick={onClickHandler}><Delete/>
+                        <EditableSpan  title={props.title} changeTitle={onChangeTitleHandler}/>
+                        <IconButton  onClick={onClickHandler}><Delete/>
                         </IconButton>
                     </div>
                 })
