@@ -123,7 +123,6 @@ function App() {
                                 <Todolist
                                     key={tl.id}
                                     id={tl.id}
-                                    todolistId={tl.id}
                                     title={tl.title}
                                     tasks={taskForTodolist}
                                     addTask={addTask}
