@@ -1,10 +1,10 @@
 import axios, {AxiosResponse} from "axios";
 
-const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
+export const instance = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.1',
     withCredentials: true,
     headers: {
-        'API-KEY': 'e752a7cb-47a3-4c25-9f40-74c312d56809'
+        'API-KEY': '9e1ccf6a-65b5-418c-afa3-916828fe6fef'
     }
 })
 
@@ -50,7 +50,6 @@ export type ResponseType<D = {}> = {
     data: D
 }
 
-
 export enum TaskStatuses {
     New = 0,
     InProgress = 1,
@@ -90,4 +89,9 @@ type GetTasksResponse = {
     error: string | null
     totalCount: number
     items: TaskType[]
+}
+export enum RESULT_CODES{
+    succeeded=0,
+    error=1,
+    bad_captcha=2
 }
