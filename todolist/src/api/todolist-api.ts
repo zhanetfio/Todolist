@@ -36,6 +36,8 @@ export const todolistsAPI = {
     }
 }
 
+
+
 // types
 export type TodolistType = {
     id: string
@@ -49,6 +51,7 @@ export type ResponseType<D = {}> = {
     fieldsErrors: Array<string>
     data: D
 }
+
 
 export enum TaskStatuses {
     New = 0,
