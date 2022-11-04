@@ -18,10 +18,11 @@ import {Login} from "./features/Login/Login";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {initializeAppTC} from "./state/app-reducer";
 import {logoutTC} from "./state/auth-reducer";
+import {authAPI} from "./api/auth";
 
 
 function App() {
-
+    console.log('Rendering App')
     const status = useAppSelector(state => state.app.status)
     const isInitialize = useAppSelector(state => state.app.isInitialize)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
@@ -29,21 +30,30 @@ function App() {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
+        console.log(' useEffect Initialization')
         dispatch(initializeAppTC())
+        return()=>{
+            console.log('Unmount!')
+        }
     }, [])
 
-    if (isInitialize) {
-        return (
-            <div
-                style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
-                <CircularProgress/>
-            </div>
-        )
-    }
 
     const logoutHandler = () => {
+        console.log('logOut handler')
         dispatch(logoutTC())
     }
+//     if (isInitialize) {
+// debugger
+//         console.log('if isInitiazie')
+//         return (
+//             <div
+//                 style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+//                 <CircularProgress/>
+//             </div>
+//         )
+//
+//     }
+
 
     return (
         <div className="App">

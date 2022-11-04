@@ -10,7 +10,7 @@ export type RemoveTodolistAT = {
 }
 export type AddTodolistAT = {
     type: 'ADD-TODOLIST',
-    todolist:TodolistType
+    todolist: TodolistType
 }
 export type ChangeTodolistTitleAT = {
     type: 'CHANGE-TODOLIST-TITLE',
@@ -66,7 +66,7 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = initialState
             return [...state]
         }
         case 'SET-TODOLISTS': {
-            return action.todolists.map((tl => ({...tl, filter: 'all',entityStatus: 'idle'})))
+            return action.todolists.map((tl => ({...tl, filter: 'all', entityStatus: 'idle'})))
         }
         case 'TODO/CHANGE-TODOLIST-STATUS': {
             return state.map(tl => tl.id === action.id ? {...tl, status: action.status} : tl)
@@ -85,7 +85,7 @@ export const removeTodolistAC = (todolistId: string): RemoveTodolistAT => {
 export const addTodolistAC = (todolist: TodolistType): AddTodolistAT => {
     return {
         type: 'ADD-TODOLIST',
-       todolist
+        todolist
     }
 }
 export const changeTodolistTitleAC = (todolistId: string, value: string): ChangeTodolistTitleAT => {
@@ -113,9 +113,11 @@ export const changeTodolistStatusAC = (id: string, status: RequestStatusType) =>
     id,
     status
 } as const)
+
 //ThunkCreators
 export const getTodosTC = (): AppThunk => {
-    return (dispatch: Dispatch<AppActionsType>) => {
+    console.log('enter getTodos thunk')
+    return (dispatch) => {
         todolistsAPI.getTodolists().then(res =>
             dispatch(setTodolistsAC(res.data)))
     }
@@ -127,10 +129,11 @@ export const removeTodolistTC = (todolistId: string): AppThunk => async dispatch
     dispatch(setAppStatusAC('succeeded'))
 }
 export const addTodolistTC = (title: string): AppThunk => async dispatch => {
+    console.log('enter addTodolist thunk')
     const res = await todolistsAPI.createTodolist(title)
     dispatch(addTodolistAC(res.data.data.item))
 }
 export const changeTodolistTitleTC = (todolistId: string, value: string): AppThunk => async dispatch => {
-    const res = await todolistsAPI.updateTodolist(todolistId, value)
+    await todolistsAPI.updateTodolist(todolistId, value)
     dispatch(changeTodolistTitleAC(todolistId, value))
 }

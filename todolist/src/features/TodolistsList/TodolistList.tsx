@@ -17,7 +17,7 @@ import {Navigate} from "react-router-dom";
 
 
 export const TodolistsList: React.FC = () => {
-
+    console.log('Rendering Todolist')
     const todolists = useAppSelector(state => state.todolists)
     const tasks = useAppSelector(state => state.tasks)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
@@ -25,10 +25,13 @@ export const TodolistsList: React.FC = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+        console.log('useEffect getTodos')
         if (isLoggedIn) {
+            console.log('isLoggedIn, call dispatch')
             dispatch(getTodosTC())
-           // authAPI.me()
+            //authAPI.me()
         }
+        console.log('Got todos')
     }, [])
 
     const addTask = useCallback(function (todolistId: string, title: string) {

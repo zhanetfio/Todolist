@@ -80,19 +80,6 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
                     .map(t => t.id === action.taskId ? {...t, ...action.model} : t)
             }
         }
-        /* case "CHANGE-TASK-STATUS": {
-             const copyTask = {...state};
-             copyTask[action.todolistId] = state[action.todolistId].map(t => t.id === action.taskId
-                 ? {...t, status: action.status}
-                 : t)
-             state[action.todolistId] = copyTask[action.todolistId]
-             return copyTask
-         }
-         case "CHANGE-TASK-TITLE": {
-             let copyTask = state[action.todolistId];
-             state[action.todolistId] = copyTask.map(t => t.id === action.taskId ? {...t, title: action.title} : t)
-             return ({...state})
-         }*/
         case "ADD-TODOLIST": {
             return {...state, [action.todolist.id]: []}
         }
@@ -102,6 +89,7 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
             return copyState;
         }
         case 'SET-TODOLISTS': {
+            console.log('case set Todolists')
             const copyState = {...state}
             action.todolists.forEach((tl) => {
                 copyState[tl.id] = []
@@ -109,6 +97,7 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
             return copyState
         }
         case 'SET-TASKS': {
+            console.log('case set tasks')
             return {
                 ...state, [action.todolistId]: action.tasks
             }
@@ -165,9 +154,11 @@ export const removeTasksTC = (todolistId: string, taskId: string): AppThunk => a
 
 
 export const addTaskTC = (todolistId: string, title: string): AppThunk => async dispatch => {
+    console.log('enter addTask thunk')
     dispatch(setAppStatusAC('loading'))
     await todolistsAPI.createTask(todolistId, title).then(res => {
         if (res.data.resultCode === 0) {
+            console.log('login resultCode=0,dispatch addTaskAC')
             const task = res.data.data.item
             dispatch(addTaskAC( task))
             dispatch(setAppStatusAC('succeeded'))

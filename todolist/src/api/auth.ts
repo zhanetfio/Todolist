@@ -14,12 +14,14 @@ export type MeType = {
 }
 
 export const authAPI = {
-    me: () => {
+        me: () => {
+            console.log('get auth/me')
         return instance.get<ResponseType<MeType>>('auth/me').then(res => {
             return res
         })
-    },
+        },
     login: (data: LoginParamsType) => {
+        console.log('get auth/login')
         return instance.post<LoginParamsType, AxiosResponse<ResponseType<{ userId: number }>>>('auth/login', data)
     },
     logout: () => {
