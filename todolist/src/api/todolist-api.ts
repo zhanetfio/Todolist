@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from "axios";
 
 export const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.1',
+    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true,
     headers: {
         'API-KEY': '9e1ccf6a-65b5-418c-afa3-916828fe6fef'
@@ -9,6 +9,19 @@ export const instance = axios.create({
 })
 
 //api
+
+export const authAPI = {
+    me: () => {
+        return instance.get<ResponseType<MeType>>('auth/me')
+    },
+    login: (data: LoginParamsType) => {
+        return instance.post<LoginParamsType, AxiosResponse<ResponseType<{ userId: number }>>>('auth/login', data)
+    },
+    logout: () => {
+        return instance.delete<ResponseType>('auth/login')
+    }
+}
+
 export const todolistsAPI = {
     getTodolists() {
         return instance.get<TodolistType[]>('todo-lists');
@@ -37,8 +50,19 @@ export const todolistsAPI = {
 }
 
 
-
 // types
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: string
+}
+export type MeType = {
+    id: number
+    email: string
+    login: string
+}
+
 export type TodolistType = {
     id: string
     title: string
@@ -48,7 +72,7 @@ export type TodolistType = {
 export type ResponseType<D = {}> = {
     resultCode: number
     messages: Array<string>
-    fieldsErrors: Array<string>
+    fieldsErrors?: Array<string> | undefined
     data: D
 }
 
@@ -93,8 +117,9 @@ type GetTasksResponse = {
     totalCount: number
     items: TaskType[]
 }
-export enum RESULT_CODES{
-    succeeded=0,
-    error=1,
-    bad_captcha=2
+
+export enum RESULT_CODES {
+    succeeded = 0,
+    error = 1,
+    bad_captcha = 2
 }
