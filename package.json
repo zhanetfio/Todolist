@@ -1,6 +1,6 @@
 {
   "name": "todolist",
-  "homepage": "https://todolist-green-two.vercel.app/",
+  "homepage": "https://todolist-green-two.vercel.app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
