@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import {FormikHelpers, useFormik} from "formik";
 import {loginTC} from "../../state/auth-reducer";
-import {useAppDispatch, useAppSelector} from "../../state/hooks";
+import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {Navigate} from "react-router-dom";
 
 type FormikErrorType = {
@@ -71,7 +71,7 @@ export const Login = () => {
                         <FormLabel>
                             <p>To log in get registered
                                 <a href={'https://social-network.samuraijs.com/'}
-                                   target={'_blank'}> here
+                                   target={'_blank'} rel='noreferrer'> here
                                 </a>
                             </p>
                             <p>or use common test account credentials:</p>

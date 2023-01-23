@@ -1,5 +1,5 @@
-import {useAppDispatch, useAppSelector} from "../../state/hooks";
-import {setAppErrorAC} from "../../state/app-reducer";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {setAppErrorAC} from "../../../state/app-reducer";
 import {AlertProps, Snackbar} from "@material-ui/core";
 import {forwardRef} from "react";
 

@@ -9,8 +9,8 @@ import {
     Toolbar,
     } from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {useAppDispatch, useAppSelector} from "./state/hooks";
-import {ErrorSnackbar} from "./components/ErrorSnackBar/ErrorSnackBar";
+import {useAppDispatch, useAppSelector} from "./common/hooks/hooks";
+import {ErrorSnackbar} from "./common/components/ErrorSnackBar/ErrorSnackBar";
 import {TodolistsList} from "./features/TodolistsList/TodolistList";
 import {Login} from "./features/Auth/Login";
 import {Navigate, Route, Routes} from "react-router-dom";
@@ -21,7 +21,7 @@ import {logoutTC} from "./state/auth-reducer";
 function App() {
 
     const status = useAppSelector(state => state.app.status)
-    const isInitialize = useAppSelector(state => state.app.isInitialize)
+    //const isInitialize = useAppSelector(state => state.app.isInitialize)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
     const dispatch = useAppDispatch()
@@ -34,6 +34,7 @@ function App() {
     const logoutHandler = () => {
         dispatch(logoutTC())
     }
+
 
     return (
         <div className="App">

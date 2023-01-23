@@ -1,20 +1,92 @@
-import { addTodolistTC, TodolistDomainType, todolistsReducer} from "./todolists-reducer";
 import {tasksReducer, TasksStateType} from "./tasks-reducer";
+import {v1} from "uuid";
+import {addTodolistTC, TodolistDomainType, todolistsReducer} from "./todolists-reducer";
+import {TaskPriorities, TaskStatuses, TodolistType} from "../api/todolist-api";
 
-/*
-test('it`s should be equals', () => {
 
-    const startTasksState: TasksStateType = {};
-    const startTodolistsState: Array<TodolistDomainType> = [];
+const toDoListID_1 = v1();
+const toDoListID_2 = v1();
+const toDoListID_3 = v1();
 
-    const action = addTodolistTC.fulfilled(  {todolistId:'3',title: 'new',order:0} ,'requestId', {todolist:'3',title: 'new',order:0}/!*todolist.id:'',title:'New',addedDate:'',order:0}}*!/);
-    const endTasksState = tasksReducer(startTasksState, action)
-    const endTodolistsState = todolistsReducer(startTodolistsState, action)
+let todoList: TodolistDomainType[];
+let newTodoList: TodolistType;
+let tasks: TasksStateType;
+beforeEach(() => {
+    todoList = [
+        {
+            id: '1',
+            title: 'HTML/CSS',
+            filter: 'all',
+            addedDate: '',
+            order: 0,
+            entityStatus: "idle"
+        },
+        {
+            id: '2',
+            title: 'JS/TS',
+            filter: 'all',
+            addedDate: '',
+            order: 0,
+            entityStatus: "idle"
+        },
+    ]
+    tasks = {
+        [toDoListID_1]: [
+            {
+                id: '0',
+                todoListId: '2',
+                title: 'HTML/CSS',
+                status:TaskStatuses.New,
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: '',
 
-    const keys = Object.keys(endTasksState);
-    const idFromTasks = keys[0];
-    const idFromTodolists = endTodolistsState[0].id;
+            },
+            {
+                id: '1',
+                todoListId: '2',
+                title: 'HTML/CSS',
+                status:TaskStatuses.New,
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: '',
 
-    expect(idFromTasks).toBe(action.payload.todolist);
-    expect(idFromTodolists).toBe(action.payload.todolist);
-});*/
+            }
+        ],
+        [toDoListID_2]: [
+            {
+                id: '0',
+                todoListId: '3',
+                title: 'HTML/CSS',
+                status: TaskStatuses.New,
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                description: '',
+
+            }
+        ],
+    }
+    newTodoList = {
+        id: toDoListID_3,
+        title: 'New ToDoList',
+        order: 0,
+        addedDate: ''
+    }
+})
+
+test('new todo list and task', () => {
+    const action = addTodolistTC.fulfilled({todolist: newTodoList}, 'requestId',  'New ToDoList')
+    const todoListReducerTest = todolistsReducer(todoList, action)
+    const tasksReducerTest = tasksReducer(tasks, action)
+    expect(todoListReducerTest.length).toBe(3)
+    expect(tasksReducerTest[toDoListID_3]).toStrictEqual([])
+})

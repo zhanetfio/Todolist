@@ -1,4 +1,4 @@
-import {useAppDispatch, useAppSelector} from "../../state/hooks";
+import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import React, {useCallback, useEffect} from "react";
 import {
     addTodolistTC,
@@ -10,7 +10,7 @@ import {
 import {addTaskTC, removeTaskTC, updateTaskTC} from "../../state/tasks-reducer";
 import {TaskStatuses} from "../../api/todolist-api";
 import {Grid, Paper,} from "@material-ui/core";
-import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
+import {AddItemForm} from "../../common/components/AddItemForm/AddItemForm";
 import {Todolist} from "./Todolist/Todolist";
 import {Navigate} from "react-router-dom";
 

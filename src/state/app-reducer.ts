@@ -18,7 +18,7 @@ export const initializeAppTC = createAsyncThunk('app/initializeApp', async (para
 const slice = createSlice({
     name: 'app',
     initialState: {
-        status: 'idle' as RequestStatusType,
+        status: 'succeeded' as RequestStatusType,
         error: null as string | null,
         isInitialize: false
     },
@@ -47,21 +47,3 @@ export const setAppErrorAC = slice.actions.setAppErrorAC
 
 //Types
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
-//export type RequestErrorType = 'error' | 'info' | 'success' | 'warning'
-/*
-export type AppSetStatusAT = {
-    type: 'APP/SET-STATUS',
-    status: RequestStatusType
-}
-export type AppSetErrorAT = {
-    type: 'APP/SET-ERROR',
-    value: null | string
-}
-export type SetIsInitializeAT = {
-    type: 'APP/SET-IS-INITIALIZE'
-    isInitialize: boolean
-}
-*/
-
-//type InitialStateType = typeof initialState
-//export  type AppStatusActionType = AppSetStatusAT | AppSetErrorAT | SetIsInitializeAT

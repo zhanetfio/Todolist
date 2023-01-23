@@ -9,7 +9,7 @@ import {
 } from "../api/todolist-api";
 import {AppRootActionsType} from "./store";
 import {setAppErrorAC, setAppStatusAC} from "./app-reducer";
-import {handleServerAppError, handleServerNetworkError} from "../utils/errors-utils";
+import {handleServerAppError, handleServerNetworkError} from "../common/utils/errors-utils";
 import axios, {AxiosError} from "axios";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 
