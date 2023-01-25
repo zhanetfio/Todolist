@@ -60,12 +60,13 @@ export const Todolist = memo((props: TodolistType) => {
 
         return (
             <div>
-                <div><EditableSpan title={title} changeTitle={changeTodolistTitle}/>
+                <h3>
+                    <EditableSpan title={title} changeTitle={changeTodolistTitle}/>
                     <IconButton
                         disabled={entityStatus === 'loading'}
                         onClick={removeTodolistHandler}><Delete/>
                     </IconButton>
-                </div>
+                </h3>
                 <AddItemForm addItem={addTask}/>
 
                 <div>

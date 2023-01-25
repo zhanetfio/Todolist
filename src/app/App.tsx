@@ -58,7 +58,7 @@ function App() {
                 </Toolbar>
                 {/* {status === 'loading' && <LinearProgress color='secondary'/>}*/}
             </AppBar>
-            <Container fixed>
+            <Container className='container' fixed>
                 <Routes>
                     <Route path={'/'} element={<TodolistsList/>}/>
                     <Route path={'/login'} element={<Login/>}/>
@@ -73,35 +73,3 @@ function App() {
 
 export default App;
 
-/*
-
-const dispatch = useAppDispatch()
-const isInitialized = useSelector(appSelectors.selectIsInitialized)
-
-const newTodoListHandler = useCallback((titleValue: string) => dispatch(createToDoListTC({titleValue})), [dispatch])
-
-useEffect(() => {
-    dispatch(initializeAppTC())
-}, [])
-
-if (!isInitialized) {
-    return <div
-        style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
-        <CircularProgress/>
-    </div>
-}
-
-return <>
-    <div className={styles.appComponent}>
-        <Header newTitleCallBack={newTodoListHandler}/>
-        <CustomizedSnackbars/>
-        <Container fixed>
-            <Routes>
-                <Route path={'/'} element={<TodolistsList/>}/>
-                <Route path={'/login'} element={<Login/>}/>
-                <Route path={'/error404'} element={<Error404/>}/>
-                <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
-            </Routes>
-        </Container>
-    </div>
-</>*/

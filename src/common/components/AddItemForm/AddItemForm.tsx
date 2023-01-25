@@ -1,6 +1,7 @@
 import React, {ChangeEvent, memo, useState} from "react";
 import { IconButton, TextField} from "@material-ui/core";
 import {AddBox} from "@material-ui/icons";
+import style from './AddItemForm.module.css'
 
 type AddItemFormType = {
     addItem: (title: string) => void
@@ -38,6 +39,9 @@ export const  AddItemForm = memo((props: AddItemFormType)=> {
                    onKeyDown={onKeyDownHandler}
                    label="Title"
                    helperText={error}
+                   size={'small'}
+                   className={style.input}
+
         />
         <IconButton color="primary" onClick={addTask}><AddBox /></IconButton>
     </div>

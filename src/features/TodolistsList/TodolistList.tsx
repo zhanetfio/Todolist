@@ -31,7 +31,7 @@ export const TodolistsList: React.FC = () => {
             <Grid container spacing={3}>
                 {todolists.map((tl) => {
                     return <Grid item key={tl.id}>
-                        <Paper style={{padding: "10px"}}>
+                        <Paper elevation={24}  style={{padding: "10px"}}>
                             <Todolist todolist={tl}/>
                         </Paper>
                     </Grid>
