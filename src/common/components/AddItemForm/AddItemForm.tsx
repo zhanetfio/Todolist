@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, memo, useState} from "react";
 import { IconButton, TextField} from "@material-ui/core";
 import {AddBox} from "@material-ui/icons";
 
@@ -7,7 +7,7 @@ type AddItemFormType = {
 
 }
 
-export const  AddItemForm = React.memo((props: AddItemFormType)=> {
+export const  AddItemForm = memo((props: AddItemFormType)=> {
     const [title, setTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
 
@@ -38,7 +38,6 @@ export const  AddItemForm = React.memo((props: AddItemFormType)=> {
                    onKeyDown={onKeyDownHandler}
                    label="Title"
                    helperText={error}
-
         />
         <IconButton color="primary" onClick={addTask}><AddBox /></IconButton>
     </div>

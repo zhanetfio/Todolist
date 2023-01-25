@@ -1,9 +1,10 @@
 import {Dispatch} from "redux";
-import { setAppErrorAC, setAppStatusAC} from "../../state/app-reducer";
-import { ResponseType } from '../../api/todolist-api'
+import { setAppErrorAC, setAppStatusAC} from "../../app/app-reducer";
+import { ResponseType } from '../../api/todolist-api';
+
 
 export const handleServerNetworkError = (error:  string , dispatch:Dispatch) => {
-    dispatch(setAppErrorAC({error: error }))
+    dispatch(setAppErrorAC({error:error }))
     dispatch(setAppStatusAC({status:'failed'}))
 }
 

@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 
-export const instance = axios.create({
+const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true,
     headers: {
@@ -11,13 +11,13 @@ export const instance = axios.create({
 //api
 
 export const authAPI = {
-    me: () => {
+    me() {
         return instance.get<ResponseType<MeType>>('auth/me')
     },
-    login: (data: LoginParamsType) => {
+    login(data: LoginParamsType) {
         return instance.post<LoginParamsType, AxiosResponse<ResponseType<{ userId: number }>>>('auth/login', data)
     },
-    logout: () => {
+    logout() {
         return instance.delete<ResponseType>('auth/login')
     }
 }
@@ -35,6 +35,7 @@ export const todolistsAPI = {
     updateTodolist(id: string, title: string) {
         return instance.put<{ title: string }, AxiosResponse<ResponseType>>(`todo-lists/${id}`, {title});
     },
+
     getTasks(todolistId: string) {
         return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`);
     },
@@ -54,13 +55,18 @@ export const todolistsAPI = {
 export type LoginParamsType = {
     email: string
     password: string
-    rememberMe: boolean
+    rememberMe?: boolean
     captcha?: string
 }
+
+export type FieldErrorType = {
+    field: string
+    error: string
+}
 export type MeType = {
-    id: number
-    email: string
-    login: string
+    id: number | null
+    email: string | null
+    login: string | null
 }
 
 export type TodolistType = {
@@ -93,12 +99,12 @@ export enum TaskPriorities {
 }
 
 export type TaskType = {
-    description: string
+    description?: string
     title: string
     status: TaskStatuses
     priority: TaskPriorities
-    startDate: string
-    deadline: string
+    startDate?: string
+    deadline?: string
     id: string
     todoListId: string
     order: number
@@ -113,7 +119,7 @@ export type UpdateTaskModelType = {
     deadline: string
 }
 type GetTasksResponse = {
-    error: string | null
+    error?: string | null
     totalCount: number
     items: TaskType[]
 }

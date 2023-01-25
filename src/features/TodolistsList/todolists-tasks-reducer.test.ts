@@ -1,7 +1,8 @@
-import {tasksReducer, TasksStateType} from "./tasks-reducer";
+import {tasksReducer, TasksStateType} from "./Todolist/Task/tasks-reducer";
 import {v1} from "uuid";
-import {addTodolistTC, TodolistDomainType, todolistsReducer} from "./todolists-reducer";
-import {TaskPriorities, TaskStatuses, TodolistType} from "../api/todolist-api";
+import {TodolistDomainType, todolistsReducer} from "./todolists-reducer";
+import {TaskPriorities, TaskStatuses, TodolistType} from "../../api/todolist-api";
+import {addTodolist} from "./todolists-actions";
 
 
 const toDoListID_1 = v1();
@@ -84,7 +85,7 @@ beforeEach(() => {
 })
 
 test('new todo list and task', () => {
-    const action = addTodolistTC.fulfilled({todolist: newTodoList}, 'requestId',  'New ToDoList')
+    const action = addTodolist.fulfilled( newTodoList, 'requestId', {title:'New ToDoList'})
     const todoListReducerTest = todolistsReducer(todoList, action)
     const tasksReducerTest = tasksReducer(tasks, action)
     expect(todoListReducerTest.length).toBe(3)

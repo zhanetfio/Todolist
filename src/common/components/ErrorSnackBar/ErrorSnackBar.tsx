@@ -1,5 +1,5 @@
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
-import {setAppErrorAC} from "../../../state/app-reducer";
+import {setAppErrorAC} from "../../../app/app-reducer";
 import {AlertProps, Snackbar} from "@material-ui/core";
 import {forwardRef} from "react";
 
@@ -9,6 +9,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
 })
 
 export function ErrorSnackbar() {
+
     const dispatch=useAppDispatch()
     const error =useAppSelector(state=>state.app.error)
 

@@ -10,9 +10,10 @@ import {
     TextField
 } from "@material-ui/core";
 import {FormikHelpers, useFormik} from "formik";
-import {loginTC} from "../../state/auth-reducer";
+import {loginTC} from "./auth-reducer";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {Navigate} from "react-router-dom";
+import {selectIsLoggedIn} from "./selectors";
 
 type FormikErrorType = {
     email?: string
@@ -28,7 +29,7 @@ type FormLoginType = {
 export const Login = () => {
 
     const dispatch = useAppDispatch()
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const isLoggedIn = useAppSelector(selectIsLoggedIn)
 
     const formik = useFormik({
         initialValues: {
@@ -92,8 +93,9 @@ export const Login = () => {
                                 <div style={{color: 'red'}}>{formik.errors.password}</div>}
                             <FormControlLabel
                                 label={'Remember me'}
-                                control={<Checkbox checked={formik.values.rememberMe}
-                                                   {...formik.getFieldProps('rememberMe')} />}/>
+                                control={<Checkbox
+                                    checked={formik.values.rememberMe}
+                                    {...formik.getFieldProps('rememberMe')} />}/>
                             <Button type={'submit'} variant={'contained'} color={'primary'}>
                                 Login
                             </Button>
