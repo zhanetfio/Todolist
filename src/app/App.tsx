@@ -56,7 +56,7 @@ function App() {
                     <Header title={newTodoListHandler}/>
                     {isLoggedIn && <Button onClick={logoutHandler} color="inherit">Logout</Button>}
                 </Toolbar>
-                {/* {status === 'loading' && <LinearProgress color='secondary'/>}*/}
+                 {status === 'loading' && <LinearProgress color='secondary'/>}
             </AppBar>
             <Container className='container' fixed>
                 <Routes>
